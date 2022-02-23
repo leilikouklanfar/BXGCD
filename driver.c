@@ -32,9 +32,18 @@ int main()
 	// TEST5
 	printf("\n\n\n\n****************************************************************************************************************************\n\nTEST: FAST BXGCD 31-BIT RUNTIME W/O COMPILER OPTIMIZATION\n");
 	status = system("gcc ./BXGCD_FASTDIV2/bxgcd_fast_div2.c -o ./BXGCD_FASTDIV2/bxgcd_fast_div2 -lgmp");
-	status = system("./BXGCD_FASTDIV2/bxgcd");
+	status = system("./BXGCD_FASTDIV2/bxgcd_fast_div2");
 	printf("\nTEST: FAST BXGCD 31-BIT RUNTIME WITH COMPILER OPTIMIZATION (-O3)\n");
 	status = system("gcc ./BXGCD_FASTDIV2/bxgcd_fast_div2.c -o ./BXGCD_FASTDIV2/bxgcd_fast_div2 -lgmp -O3");
-	status = system("./BXGCD_FASTDIV2/bxgcd");
+	status = system("./BXGCD_FASTDIV2/bxgcd_fast_div2");
+	
+	// TEST5
+	printf("\n\n\n\n****************************************************************************************************************************\n\nTEST:  FAST MOD 3 BXGCD 31-BIT RUNTIME W/O COMPILER OPTIMIZATION\n");
+	status = system("gcc ./BXGCD_FAST_DIV3/bxgcd_fast_Mod3.c -o ./BXGCD_FAST_DIV3/bxgcd_fast_Mod3 -lgmp");
+	status = system("./BXGCD_FAST_DIV3/bxgcd_fast_Mod3");
+	printf("\nTEST: FAST MOD 3 BXGCD 31-BIT RUNTIME WITH COMPILER OPTIMIZATION (-O3)\n");
+	status = system("gcc ./BXGCD_FAST_DIV3/bxgcd_fast_Mod3.c -o ./BXGCD_FAST_DIV3/bxgcd_fast_Mod3 -lgmp -O3");
+	status = system("./BXGCD_FAST_DIV3/bxgcd_fast_Mod3");
+
 	return 0;
 }
