@@ -27,12 +27,11 @@ long bxgcd(int x, int y)
     // For both to be even, isEven will return
     while ((x % 2 == 0) && (y % 2 == 0))
     {
-        x = x / 2;
-        y = y / 2;
+        x = x * (0.5);
+        y = y * (0.5);
         g = 2 * g;
     }
 
-    // printf("[STEP 3]\n");
     u = x;
     v = y;
     s1 = 1;
@@ -43,30 +42,30 @@ long bxgcd(int x, int y)
     {
         while ((u % 2) == 0)
         {
-            u = u / 2;
+            u = u * (0.5);
             if ((s1 % 2 == 0) && (t1 % 2 == 0))
             {
-                s1 = s1 / 2;
-                t1 = t1 / 2;
+                s1 = s1 * (0.5);
+                t1 = t1 * (0.5);
             }
             else
             {
-                s1 = (s1 + y) / 2;
-                t1 = (t1 - x) / 2;
+                s1 = (s1 + y) * (0.5);
+                t1 = (t1 - x) * (0.5);
             }
         }
         while ((v % 2) == 0)
         {
-            v = v / 2;
+            v = v * (0.5);
             if ((s2 % 2 == 0) && (t2 % 2 == 0))
             {
-                s2 = s2 / 2;
-                t2 = t2 / 2;
+                s2 = s2 * (0.5);
+                t2 = t2 * (0.5);
             }
             else
             {
-                s2 = (s2 + y) / 2;
-                t2 = (t2 - x) / 2;
+                s2 = (s2 + y) * (0.5);
+                t2 = (t2 - x) * (0.5);
             }
         }
 
@@ -138,7 +137,7 @@ int main()
     printf("\n****************************************************************************************************************************\n");
     printf("BXGCD RUNTIME FOR COMPUTING THE BXGCD OF TWO 31-BIT NUMBERS\n[SAMPLE SIZE: 10000 iterations per divisor]");
     printf("\n****************************************************************************************************************************\n");
-    printf("(Approximatly around the ~87000000ns-88000000ns range)\n");
+    printf("(Approximatly around the ~78700000-80000000ns range)\n");
     printf("Total Run Time: %lu nanosecond\n", bxgcd_run_time);
     printf("****************************************************************************************************************************\n");
 
