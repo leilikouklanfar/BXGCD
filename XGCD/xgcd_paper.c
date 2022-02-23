@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <gmp.h>
 #include <time.h>
-// A faster version of the algorithm defined in the paper(same idea, less instansations). The algorithm defined in the paper is xgcd_paper.c.
+
 static inline long get_nanos()
 {
     struct timespec ts;
@@ -12,34 +12,30 @@ static inline long get_nanos()
 
 long xgcd(int a, int b)
 {
+    //printf("\nNum1: %d\nrNum2: %d", a, b);
     long start_time, stop_time;
-    int last_s, last_t;
+    int r, s, t, s1, s2, t2, t1, quotient;
     start_time = get_nanos();
-    last_s = 1;
-    last_t = 0;
-    int s = 0;
-    int t = 1;
-    int r = b;      // b
-    int last_r = a; // a
-    int quotient, temp;
-    while (r)
+    s2 = 1;
+    s1 = 0;
+    t2 = 0;
+    t1 = 1;
+    while (b != 0)
     {
-        quotient = last_r / r;
+        quotient = a / b;     // a div b = floor(a/b)
+        r = a - quotient * b; // a mod b = a - b * ( floor(a/b) )
+        s = s2 - quotient * s1;
+        t = t2 - quotient * t1;
 
-        temp = last_r;
-        last_r = r;
-        r = temp - quotient * r;
-
-        temp = last_s;
-        last_s = s;
-        s = temp - quotient * s;
-
-        temp = last_t;
-        last_t = t;
-        t = temp - quotient * t;
+        a = b;
+        b = r;
+        s2 = s1;
+        s1 = s;
+        t2 = t1;
+        t1 = t;
     }
+    //printf("\nrGCD: %d\ns: %d\nt: %d", a, s2, t2);
     stop_time = get_nanos();
-    // printf("\nrGCD: %d\nNum1: %d\nrNum2: %d\nlast_s: %d\nlast_t: %d", last_r, a, b, last_s, last_t);
     return stop_time - start_time;
 }
 
@@ -95,3 +91,38 @@ int main()
     mpz_clear(rNumMpz2);
     return 0;
 }
+
+/**
+ * @brief  XGCD iterative
+ *  gcd(a,b)=as+bt last_s.last_t. a>b
+
+static inline int xgcd(int a, int b, int last_s, int last_t)
+{
+    last_s = 1;
+    last_t = 0;
+    int s = 0;
+    int t = 1;
+    int r = b;
+    int last_r = a;
+    int quotient, temp;
+    while (r)
+    {
+        quotient = last_r / r;
+
+        temp = last_r;
+        last_r = r;
+        r = temp - quotient * r;
+
+        temp = last_s;
+        last_s = s;
+        s = temp - quotient * s;
+
+        temp = last_t;
+        last_t = t;
+        t = temp - quotient * t;
+    }
+
+
+    return last_r;
+}
+ */
